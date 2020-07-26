@@ -1,24 +1,33 @@
-# vue-keep
+# Vue Keep
 
-## Project setup
-```
-npm install
-```
+A Google Keep clone with Vue, Typescript and Firestore.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Demo: https://vue-keep-sepia.vercel.app/
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Usage
 
-### Lints and fixes files
+Create a `.env.local` file at the root path and enter your firebase project creds with these keys:
+
 ```
-npm run lint
+VUE_APP_FB_API_KEY=
+VUE_APP_FB_AUTH_DOMAIN=
+VUE_APP_FB_DATABASE_URL=
+VUE_APP_FB_PROJECT_ID=
+VUE_APP_FB_STORAGE_BUCKET=
+VUE_APP_FB_MESSAGING_SENDER_ID=
+VUE_APP_FB_APP_ID=
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```bash
+# Install dependencies
+$ npm install
+
+# Compiles and hot-reloads for development
+$ npm run serve
+
+# Compiles and minifies for production
+$ npm run build
+
+# Lints and fixes files
+$ npm run lint
+```
