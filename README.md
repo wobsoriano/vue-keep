@@ -6,7 +6,7 @@ Demo: https://vue-keep-sepia.vercel.app/
 
 ## Usage
 
-Create a `.env.local` file at the root path and enter your firebase project creds with these keys:
+Create a `.env.local` file at the root path and enter your firebase project creds:
 
 ```
 VUE_APP_FB_API_KEY=
