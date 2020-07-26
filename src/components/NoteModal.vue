@@ -18,6 +18,8 @@
           single-line
           :value="selectedNote.content"
           @input="updateContent"
+          maxlength="100"
+          counter
         ></v-textarea>
       </div>
       <v-card-actions>
@@ -33,13 +35,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { Note, Snackbar, EditNoteField } from '@/store/models';
-import { SnackbarColorTypes } from '@/store/enums';
-import { namespace } from 'vuex-class';
+import { Component, Vue } from "vue-property-decorator";
+import { Note, Snackbar, EditNoteField } from "@/store/models";
+import { SnackbarColorTypes } from "@/store/enums";
+import { namespace } from "vuex-class";
 
-const notesModule = namespace('notes');
-const globalModule = namespace('global');
+const notesModule = namespace("notes");
+const globalModule = namespace("global");
 
 @Component
 export default class NoteModal extends Vue {
@@ -73,7 +75,7 @@ export default class NoteModal extends Vue {
     this.loading = false;
     this.showSnackbar({
       open: true,
-      text: 'Note updated',
+      text: "Note updated",
       color: SnackbarColorTypes.Success,
     });
     this.setShowNoteDialog(false);
@@ -85,7 +87,7 @@ export default class NoteModal extends Vue {
     this.deleteLoading = false;
     this.showSnackbar({
       open: true,
-      text: 'Note removed',
+      text: "Note removed",
       color: SnackbarColorTypes.Success,
     });
     this.setShowNoteDialog(false);
@@ -93,14 +95,14 @@ export default class NoteModal extends Vue {
 
   updateTitle(value: string): void {
     this.setNoteField({
-      name: 'title',
+      name: "title",
       value,
     });
   }
 
   updateContent(value: string): void {
     this.setNoteField({
-      name: 'content',
+      name: "content",
       value,
     });
   }

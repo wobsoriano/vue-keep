@@ -20,6 +20,8 @@
             solo
             label="Take a note..."
             single-line
+            maxlength="100"
+            counter
           ></v-textarea>
         </div>
         <v-card-actions v-show="actionsVisible">
@@ -32,19 +34,19 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { NewNote, Note, Snackbar } from '@/store/models';
-import { namespace } from 'vuex-class';
-import { SnackbarColorTypes } from '../store/enums';
+import { Component, Vue } from "vue-property-decorator";
+import { NewNote, Note, Snackbar } from "@/store/models";
+import { namespace } from "vuex-class";
+import { SnackbarColorTypes } from "../store/enums";
 
-const globalModule = namespace('global');
-const notesModule = namespace('notes');
+const globalModule = namespace("global");
+const notesModule = namespace("notes");
 
 @Component
 export default class Create extends Vue {
   note: NewNote = {
-    title: '',
-    content: '',
+    title: "",
+    content: "",
   };
 
   titleFieldVisible = false;
@@ -73,14 +75,14 @@ export default class Create extends Vue {
       await this.createNote(this.note);
       this.showSnackbar({
         open: true,
-        text: 'Note saved',
+        text: "Note saved",
         color: SnackbarColorTypes.Success,
       });
     }
 
     this.note = {
-      title: '',
-      content: '',
+      title: "",
+      content: "",
     };
   }
 }
