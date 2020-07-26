@@ -8,25 +8,28 @@
       md="4"
       lg="3"
       xl="2"
+      class="d-flex flex-column"
     >
-      <Note :note="note" />
+      <NoteItem :note="note" />
     </v-col>
   </v-row>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Note from './Note.vue';
-import notesModule from '@/store/modules/notes';
+import NoteItem from './Note.vue';
+import { Note } from '@/store/models';
+import { namespace } from 'vuex-class';
+
+const notesModule = namespace('notes');
 
 @Component({
   components: {
-    Note,
+    NoteItem,
   },
 })
 export default class Notes extends Vue {
-  get notes() {
-    return notesModule.notes;
-  }
+  @notesModule.State
+  notes!: Note[];
 }
 </script>

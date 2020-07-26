@@ -1,34 +1,33 @@
-import {
-  Module,
-  VuexModule,
-  Mutation,
-  Action,
-  getModule,
-} from 'vuex-module-decorators';
-import { Note } from '../models';
-import store from '@/store';
+import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
+import { Note, NewNote } from '../models';
+import { db } from '@/firebase';
 
 @Module({
-  dynamic: true,
-  store,
-  name: 'notes',
+  namespaced: true,
 })
-class NotesModule extends VuexModule {
+export default class NotesModule extends VuexModule {
   notes: Note[] = [];
 
   @Mutation
-  setNotes(note: Note) {
+  setNotes(notes: Note[]): void {
+    this.notes = notes;
+  }
+
+  @Mutation
+  addNote(note: Note): void {
     this.notes.unshift(note);
   }
 
   @Mutation
-  removeNote(id: string) {
+  removeNote(id: string): void {
     const idx = this.notes.findIndex((i) => i.id === id);
-    this.notes.splice(idx, 1);
+    if (idx !== -1) {
+      this.notes.splice(idx, 1);
+    }
   }
 
   @Mutation
-  updateNote(note: Note) {
+  setNote(note: Note): void {
     const idx = this.notes.findIndex((i) => i.id === note.id);
     if (idx !== -1) {
       this.notes[idx].title = note.title;
@@ -37,25 +36,26 @@ class NotesModule extends VuexModule {
   }
 
   @Action({ commit: 'setNotes' })
-  saveNoteAsync(note: Note) {
-    return {
-      id: Date.now().toString(),
-      ...note,
-    };
+  async getNotes(): Promise<Note[]> {
+    const notes = await db.getNotes();
+    return notes;
+  }
+
+  @Action({ commit: 'addNote' })
+  async createNote(note: NewNote): Promise<Note> {
+    const data = await db.createNote(note);
+    return data;
   }
 
   @Action({ commit: 'removeNote' })
-  removeNoteAsync(id: string) {
+  async removeNoteAsync(id: string): Promise<string> {
+    await db.deleteNote(id);
     return id;
   }
 
-  @Action({ commit: 'updateNote' })
-  updateNoteAsync(note: Note) {
-    return {
-      id: Date.now().toString(),
-      ...note,
-    };
+  @Action({ commit: 'setNote' })
+  async updateNote(note: Note): Promise<Note> {
+    await db.updateNote(note);
+    return note;
   }
 }
-
-export default getModule(NotesModule);

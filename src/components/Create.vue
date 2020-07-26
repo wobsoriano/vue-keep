@@ -33,12 +33,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Note } from '@/store/models';
-import notesModule from '@/store/modules/notes';
+import { NewNote, Note } from '@/store/models';
+import { namespace } from 'vuex-class';
+
+const notesModule = namespace('notes');
 
 @Component
 export default class Create extends Vue {
-  note: Note = {
+  note: NewNote = {
     title: '',
     content: '',
   };
@@ -56,9 +58,16 @@ export default class Create extends Vue {
     this.actionsVisible = false;
   }
 
+  @notesModule.Action
+  createNote!: (newNote: NewNote) => Note;
+
   async close(): Promise<void> {
     this.hideTitleFieldAndActions();
-    notesModule.saveNoteAsync(this.note);
+
+    if (this.note.title || this.note.content) {
+      await this.createNote(this.note);
+    }
+
     this.note = {
       title: '',
       content: '',
