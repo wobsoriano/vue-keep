@@ -62,10 +62,10 @@ export default class NoteModal extends Vue {
   setNoteField!: (field: EditNoteField) => void;
 
   @notesModule.Action
-  updateNote!: (note: Note) => Note;
+  updateNote!: (note: Note) => Promise<Note>;
 
   @notesModule.Action
-  removeNoteAsync!: (id: string) => string;
+  removeNoteAsync!: (id: string) => Promise<string>;
 
   async saveNote(): Promise<void> {
     this.loading = true;

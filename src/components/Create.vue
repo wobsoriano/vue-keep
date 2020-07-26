@@ -61,7 +61,7 @@ export default class Create extends Vue {
   }
 
   @notesModule.Action
-  createNote!: (newNote: NewNote) => Note;
+  createNote!: (newNote: NewNote) => Promise<Note>;
 
   @globalModule.Mutation
   showSnackbar!: (snackbar: Snackbar) => void;

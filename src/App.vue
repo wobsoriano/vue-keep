@@ -75,6 +75,6 @@ export default class App extends Vue {
   snackbar!: Snackbar;
 
   @notesModule.Action
-  getNotes!: () => Note[];
+  getNotes!: () => Promise<Note[]>;
 }
 </script>
