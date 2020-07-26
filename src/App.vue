@@ -51,7 +51,7 @@ import Create from './components/Create.vue';
 import Notes from './components/Notes.vue';
 import NoteModal from './components/NoteModal.vue';
 import { namespace } from 'vuex-class';
-import { Snackbar } from './store/models';
+import { Snackbar, Note } from './store/models';
 
 const notesModule = namespace('notes');
 const globalModule = namespace('global');
@@ -75,6 +75,6 @@ export default class App extends Vue {
   snackbar!: Snackbar;
 
   @notesModule.Action
-  getNotes!: () => void;
+  getNotes!: () => Note[];
 }
 </script>
