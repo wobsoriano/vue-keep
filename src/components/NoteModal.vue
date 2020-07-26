@@ -73,7 +73,7 @@ export default class NoteModal extends Vue {
     this.loading = false;
     this.showSnackbar({
       open: true,
-      text: 'Note saved',
+      text: 'Note updated',
       color: SnackbarColorTypes.Success,
     });
     this.setShowNoteDialog(false);
@@ -83,6 +83,11 @@ export default class NoteModal extends Vue {
     this.deleteLoading = true;
     await this.removeNoteAsync(this.selectedNote.id);
     this.deleteLoading = false;
+    this.showSnackbar({
+      open: true,
+      text: 'Note removed',
+      color: SnackbarColorTypes.Success,
+    });
     this.setShowNoteDialog(false);
   }
 

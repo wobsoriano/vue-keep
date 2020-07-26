@@ -33,9 +33,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { NewNote, Note } from '@/store/models';
+import { NewNote, Note, Snackbar } from '@/store/models';
 import { namespace } from 'vuex-class';
+import { SnackbarColorTypes } from '../store/enums';
 
+const globalModule = namespace('global');
 const notesModule = namespace('notes');
 
 @Component
@@ -61,11 +63,19 @@ export default class Create extends Vue {
   @notesModule.Action
   createNote!: (newNote: NewNote) => Note;
 
+  @globalModule.Mutation
+  showSnackbar!: (snackbar: Snackbar) => void;
+
   async close(): Promise<void> {
     this.hideTitleFieldAndActions();
 
     if (this.note.title || this.note.content) {
       await this.createNote(this.note);
+      this.showSnackbar({
+        open: true,
+        text: 'Note saved',
+        color: SnackbarColorTypes.Success,
+      });
     }
 
     this.note = {
