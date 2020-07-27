@@ -1,6 +1,7 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
 import { Note, NewNote } from '../models';
 import { db } from '@/firebase';
+import { CardColorTypes } from '@/store/enums';
 
 @Module({
   namespaced: true
@@ -32,7 +33,7 @@ export default class NotesModule extends VuexModule {
     if (idx !== -1) {
       this.notes[idx].title = note.title;
       this.notes[idx].content = note.content;
-      this.notes[idx].color = note.color;
+      this.notes[idx].color = note.color || CardColorTypes.Default;
     }
   }
 
