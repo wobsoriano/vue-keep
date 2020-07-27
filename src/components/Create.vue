@@ -11,6 +11,8 @@
             flat
             solo
             background-color="transparent"
+            maxlength="30"
+            counter
           ></v-text-field>
           <v-textarea
             v-model="note.content"
@@ -27,10 +29,7 @@
           ></v-textarea>
         </div>
         <v-card-actions v-show="actionsVisible">
-          <ColorPickerMenu
-            @color-selected="colorSelected"
-            :selected="note.color"
-          />
+          <ColorPickerMenu @color-selected="colorSelected" :selected="note.color" />
           <v-spacer></v-spacer>
           <v-btn text @click="close">Close</v-btn>
         </v-card-actions>
@@ -51,14 +50,14 @@ const notesModule = namespace('notes');
 
 @Component({
   components: {
-    ColorPickerMenu
-  }
+    ColorPickerMenu,
+  },
 })
 export default class Create extends Vue {
   note: NewNote = {
     title: '',
     content: '',
-    color: CardColorTypes.Default
+    color: CardColorTypes.Default,
   };
 
   get colors() {
@@ -96,14 +95,14 @@ export default class Create extends Vue {
       this.showSnackbar({
         open: true,
         text: 'Note saved',
-        color: SnackbarColorTypes.Success
+        color: SnackbarColorTypes.Success,
       });
     }
 
     this.note = {
       title: '',
       content: '',
-      color: CardColorTypes.Default
+      color: CardColorTypes.Default,
     };
   }
 }

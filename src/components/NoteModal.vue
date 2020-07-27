@@ -9,6 +9,8 @@
           solo
           :value="selectedNote.title"
           @input="updateTitle"
+          maxlength="30"
+          counter
           background-color="transparent"
         ></v-text-field>
         <v-textarea
@@ -28,10 +30,7 @@
         <v-btn icon @click="deleteNote" :loading="deleteLoading">
           <v-icon>mdi-delete-outline</v-icon>
         </v-btn>
-        <ColorPickerMenu
-          @color-selected="colorSelected"
-          :selected="selectedNote.color"
-        />
+        <ColorPickerMenu @color-selected="colorSelected" :selected="selectedNote.color" />
         <v-spacer></v-spacer>
         <v-btn text @click="setShowNoteDialog(false)">Close</v-btn>
         <v-btn text @click="saveNote" :loading="loading">Save</v-btn>
@@ -52,8 +51,8 @@ const globalModule = namespace('global');
 
 @Component({
   components: {
-    ColorPickerMenu
-  }
+    ColorPickerMenu,
+  },
 })
 export default class NoteModal extends Vue {
   loading = false;
@@ -87,7 +86,7 @@ export default class NoteModal extends Vue {
     this.showSnackbar({
       open: true,
       text: 'Note updated',
-      color: SnackbarColorTypes.Success
+      color: SnackbarColorTypes.Success,
     });
     this.setShowNoteDialog(false);
   }
@@ -99,7 +98,7 @@ export default class NoteModal extends Vue {
     this.showSnackbar({
       open: true,
       text: 'Note removed',
-      color: SnackbarColorTypes.Success
+      color: SnackbarColorTypes.Success,
     });
     this.setShowNoteDialog(false);
   }
@@ -107,21 +106,21 @@ export default class NoteModal extends Vue {
   updateTitle(value: string): void {
     this.setNoteField({
       name: 'title',
-      value
+      value,
     });
   }
 
   updateContent(value: string): void {
     this.setNoteField({
       name: 'content',
-      value
+      value,
     });
   }
 
   colorSelected(color: string): void {
     this.setNoteField({
       name: 'color',
-      value: color
+      value: color,
     });
   }
 }
