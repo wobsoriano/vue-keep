@@ -18,9 +18,8 @@
       <v-btn icon @click="refresh" :loading="refreshLoading">
         <v-icon>mdi-refresh</v-icon>
       </v-btn>
-      <v-btn href="https://github.com/sorxrob/vue-keep" target="_blank" text>
-        <span class="mr-2">GitHub</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-btn icon href="https://github.com/sorxrob/vue-keep" target="_blank">
+        <v-icon>mdi-github</v-icon>
       </v-btn>
     </v-app-bar>
     <v-main>
