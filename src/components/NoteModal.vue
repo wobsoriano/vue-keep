@@ -28,7 +28,10 @@
         <v-btn icon @click="deleteNote" :loading="deleteLoading">
           <v-icon>mdi-delete-outline</v-icon>
         </v-btn>
-        <ColorPickerMenu @color-selected="colorSelected" />
+        <ColorPickerMenu
+          @color-selected="colorSelected"
+          :selected="selectedNote.color"
+        />
         <v-spacer></v-spacer>
         <v-btn text @click="setShowNoteDialog(false)">Close</v-btn>
         <v-btn text @click="saveNote" :loading="loading">Save</v-btn>

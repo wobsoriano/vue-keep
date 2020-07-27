@@ -24,8 +24,8 @@
               <v-icon>
                 {{
                   name !== 'Default'
-                    ? 'mdi-checkbox-blank-circle'
-                    : 'mdi-checkbox-blank-circle-outline'
+                    ? selectedIcon(value, false)
+                    : selectedIcon(value, true)
                 }}
               </v-icon>
             </v-btn>
@@ -38,13 +38,23 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Emit } from 'vue-property-decorator';
+import { Component, Vue, Emit, Prop } from 'vue-property-decorator';
 import { CardColorTypes } from '../store/enums';
 
 @Component
 export default class ColorPickerMenu extends Vue {
+  @Prop({ type: String, required: true })
+  selected!: string;
+
   get colors() {
     return CardColorTypes;
+  }
+
+  selectedIcon(color: string, blank: boolean): string {
+    const defaultIcon = blank
+      ? 'mdi-checkbox-blank-circle-outline'
+      : 'mdi-checkbox-blank-circle';
+    return this.selected === color ? 'mdi-checkbox-marked-circle' : defaultIcon;
   }
 
   @Emit('color-selected')

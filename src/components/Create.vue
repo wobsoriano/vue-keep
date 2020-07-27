@@ -27,7 +27,10 @@
           ></v-textarea>
         </div>
         <v-card-actions v-show="actionsVisible">
-          <ColorPickerMenu @color-selected="colorSelected" />
+          <ColorPickerMenu
+            @color-selected="colorSelected"
+            :selected="note.color"
+          />
           <v-spacer></v-spacer>
           <v-btn text @click="close">Close</v-btn>
         </v-card-actions>
