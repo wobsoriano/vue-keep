@@ -1,21 +1,22 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
 import { Note, Snackbar, EditNoteField } from '@/store/models';
-import { SnackbarColorTypes } from '@/store/enums';
+import { SnackbarColorTypes, CardColorTypes } from '@/store/enums';
 
 @Module({
-  namespaced: true,
+  namespaced: true
 })
 export default class GlobalModal extends VuexModule {
   selectedNote: Note = {
     id: '',
     title: '',
     content: '',
+    color: CardColorTypes.Default
   };
   showNoteDialog = false;
   snackbar: Snackbar = {
     open: false,
     text: '',
-    color: SnackbarColorTypes.Success,
+    color: SnackbarColorTypes.Success
   };
 
   @Mutation
@@ -27,7 +28,7 @@ export default class GlobalModal extends VuexModule {
   setNoteField(payload: EditNoteField): void {
     this.selectedNote = {
       ...this.selectedNote,
-      [payload.name]: payload.value,
+      [payload.name]: payload.value
     };
   }
 

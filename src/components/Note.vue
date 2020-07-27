@@ -1,5 +1,6 @@
 <template>
   <v-card
+    :color="note.color"
     outlined
     hover
     class="flex d-flex flex-column"

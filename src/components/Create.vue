@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-col cols="12" md="8" lg="6" xl="4">
-      <v-card>
+      <v-card :color="note.color">
         <div class="pa-2">
           <v-text-field
             v-model="note.title"
@@ -10,6 +10,7 @@
             single-line
             flat
             solo
+            background-color="transparent"
           ></v-text-field>
           <v-textarea
             v-model="note.content"
@@ -22,9 +23,11 @@
             single-line
             maxlength="100"
             counter
+            background-color="transparent"
           ></v-textarea>
         </div>
         <v-card-actions v-show="actionsVisible">
+          <ColorPickerMenu @color-selected="colorSelected" />
           <v-spacer></v-spacer>
           <v-btn text @click="close">Close</v-btn>
         </v-card-actions>
@@ -34,20 +37,30 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { NewNote, Note, Snackbar } from "@/store/models";
-import { namespace } from "vuex-class";
-import { SnackbarColorTypes } from "../store/enums";
+import { Component, Vue } from 'vue-property-decorator';
+import { NewNote, Note, Snackbar } from '@/store/models';
+import { namespace } from 'vuex-class';
+import { SnackbarColorTypes, CardColorTypes } from '../store/enums';
+import ColorPickerMenu from './ColorPickerMenu.vue';
 
-const globalModule = namespace("global");
-const notesModule = namespace("notes");
+const globalModule = namespace('global');
+const notesModule = namespace('notes');
 
-@Component
+@Component({
+  components: {
+    ColorPickerMenu
+  }
+})
 export default class Create extends Vue {
   note: NewNote = {
-    title: "",
-    content: "",
+    title: '',
+    content: '',
+    color: CardColorTypes.Default
   };
+
+  get colors() {
+    return CardColorTypes;
+  }
 
   titleFieldVisible = false;
   actionsVisible = false;
@@ -60,6 +73,10 @@ export default class Create extends Vue {
   hideTitleFieldAndActions(): void {
     this.titleFieldVisible = false;
     this.actionsVisible = false;
+  }
+
+  colorSelected(color: string): void {
+    this.note.color = color;
   }
 
   @notesModule.Action
@@ -75,14 +92,15 @@ export default class Create extends Vue {
       await this.createNote(this.note);
       this.showSnackbar({
         open: true,
-        text: "Note saved",
-        color: SnackbarColorTypes.Success,
+        text: 'Note saved',
+        color: SnackbarColorTypes.Success
       });
     }
 
     this.note = {
-      title: "",
-      content: "",
+      title: '',
+      content: '',
+      color: CardColorTypes.Default
     };
   }
 }

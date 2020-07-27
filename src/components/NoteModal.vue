@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="showNoteDialog" persistent max-width="500">
-    <v-card>
+    <v-card :color="selectedNote.color">
       <div class="pa-2">
         <v-text-field
           label="Title"
@@ -9,6 +9,7 @@
           solo
           :value="selectedNote.title"
           @input="updateTitle"
+          background-color="transparent"
         ></v-text-field>
         <v-textarea
           auto-grow
@@ -20,12 +21,14 @@
           @input="updateContent"
           maxlength="100"
           counter
+          background-color="transparent"
         ></v-textarea>
       </div>
       <v-card-actions>
         <v-btn icon @click="deleteNote" :loading="deleteLoading">
           <v-icon>mdi-delete-outline</v-icon>
         </v-btn>
+        <ColorPickerMenu @color-selected="colorSelected" />
         <v-spacer></v-spacer>
         <v-btn text @click="setShowNoteDialog(false)">Close</v-btn>
         <v-btn text @click="saveNote" :loading="loading">Save</v-btn>
@@ -35,15 +38,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { Note, Snackbar, EditNoteField } from "@/store/models";
-import { SnackbarColorTypes } from "@/store/enums";
-import { namespace } from "vuex-class";
+import { Component, Vue } from 'vue-property-decorator';
+import { Note, Snackbar, EditNoteField } from '@/store/models';
+import { SnackbarColorTypes } from '@/store/enums';
+import { namespace } from 'vuex-class';
+import ColorPickerMenu from './ColorPickerMenu.vue';
 
-const notesModule = namespace("notes");
-const globalModule = namespace("global");
+const notesModule = namespace('notes');
+const globalModule = namespace('global');
 
-@Component
+@Component({
+  components: {
+    ColorPickerMenu
+  }
+})
 export default class NoteModal extends Vue {
   loading = false;
   deleteLoading = false;
@@ -75,8 +83,8 @@ export default class NoteModal extends Vue {
     this.loading = false;
     this.showSnackbar({
       open: true,
-      text: "Note updated",
-      color: SnackbarColorTypes.Success,
+      text: 'Note updated',
+      color: SnackbarColorTypes.Success
     });
     this.setShowNoteDialog(false);
   }
@@ -87,23 +95,30 @@ export default class NoteModal extends Vue {
     this.deleteLoading = false;
     this.showSnackbar({
       open: true,
-      text: "Note removed",
-      color: SnackbarColorTypes.Success,
+      text: 'Note removed',
+      color: SnackbarColorTypes.Success
     });
     this.setShowNoteDialog(false);
   }
 
   updateTitle(value: string): void {
     this.setNoteField({
-      name: "title",
-      value,
+      name: 'title',
+      value
     });
   }
 
   updateContent(value: string): void {
     this.setNoteField({
-      name: "content",
-      value,
+      name: 'content',
+      value
+    });
+  }
+
+  colorSelected(color: string): void {
+    this.setNoteField({
+      name: 'color',
+      value: color
     });
   }
 }

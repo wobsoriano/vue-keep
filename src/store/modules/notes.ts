@@ -3,7 +3,7 @@ import { Note, NewNote } from '../models';
 import { db } from '@/firebase';
 
 @Module({
-  namespaced: true,
+  namespaced: true
 })
 export default class NotesModule extends VuexModule {
   notes: Note[] = [];
@@ -20,7 +20,7 @@ export default class NotesModule extends VuexModule {
 
   @Mutation
   removeNote(id: string): void {
-    const idx = this.notes.findIndex((i) => i.id === id);
+    const idx = this.notes.findIndex(i => i.id === id);
     if (idx !== -1) {
       this.notes.splice(idx, 1);
     }
@@ -28,10 +28,11 @@ export default class NotesModule extends VuexModule {
 
   @Mutation
   setNote(note: Note): void {
-    const idx = this.notes.findIndex((i) => i.id === note.id);
+    const idx = this.notes.findIndex(i => i.id === note.id);
     if (idx !== -1) {
       this.notes[idx].title = note.title;
       this.notes[idx].content = note.content;
+      this.notes[idx].color = note.color;
     }
   }
 
