@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="white">
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
@@ -15,31 +15,27 @@
       </div>
 
       <v-spacer></v-spacer>
-
+      <v-btn icon @click="refresh" :loading="refreshLoading">
+        <v-icon>mdi-refresh</v-icon>
+      </v-btn>
       <v-btn href="https://github.com/sorxrob/vue-keep" target="_blank" text>
         <span class="mr-2">GitHub</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
     <v-main>
-      <v-container>
+      <v-container class="mt-3">
         <Create />
 
         <div class="text-center mt-2" v-if="loading">
-          <v-progress-circular
-            :size="50"
-            color="primary"
-            indeterminate
-          ></v-progress-circular>
+          <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
         </div>
 
         <Notes v-else />
 
         <NoteModal />
 
-        <v-snackbar v-model="snackbar.open" :color="snackbar.color">
-          {{ snackbar.text }}
-        </v-snackbar>
+        <v-snackbar v-model="snackbar.open" :color="snackbar.color">{{ snackbar.text }}</v-snackbar>
       </v-container>
     </v-main>
   </v-app>
@@ -65,10 +61,18 @@ const globalModule = namespace('global');
 })
 export default class App extends Vue {
   loading = true;
+  refreshLoading = false;
 
   async created(): Promise<void> {
+    this.loading = true;
     await this.getNotes();
     this.loading = false;
+  }
+
+  async refresh(): Promise<void> {
+    this.refreshLoading = true;
+    await this.getNotes();
+    this.refreshLoading = false;
   }
 
   @globalModule.State
