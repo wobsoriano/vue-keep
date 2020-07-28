@@ -7,11 +7,7 @@ export interface Note {
   color: string;
 }
 
-export interface NewNote {
-  title: string;
-  content: string;
-  color: string;
-}
+export type NewNote = Omit<Note, 'id'>;
 
 export interface Snackbar {
   open: boolean;
