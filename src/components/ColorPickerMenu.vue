@@ -55,7 +55,8 @@ export default class ColorPickerMenu extends Vue {
     const defaultIcon = blank
       ? 'mdi-checkbox-blank-circle-outline'
       : 'mdi-checkbox-blank-circle';
-    return this.selected === color ? 'mdi-checkbox-marked-circle' : defaultIcon;
+    const checkedIcon = blank ? 'mdi-check-circle-outline' : 'mdi-checkbox-marked-circle';
+    return this.selected === color ? checkedIcon : defaultIcon;
   }
 
   @Emit('color-selected')
