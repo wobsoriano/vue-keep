@@ -1,10 +1,10 @@
-import { SnackbarColorTypes } from './enums';
+import { SnackbarColorTypes, CardColorTypes } from './enums';
 
 export interface Note {
   id: string;
   title: string;
   content: string;
-  color: string;
+  color: CardColorTypes;
 }
 
 export type NewNote = Omit<Note, 'id'>;
