@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { NewNote, Note, Snackbar } from '@/store/models';
+import { NewNote, Note, Snackbar, CardColors } from '@/store/models';
 import { namespace } from 'vuex-class';
 import { SnackbarColorTypes, CardColorTypes } from '../store/enums';
 import ColorPickerMenu from './ColorPickerMenu.vue';
@@ -77,8 +77,8 @@ export default class Create extends Vue {
     this.actionsVisible = false;
   }
 
-  colorSelected(color: string): void {
-    this.note.color = color;
+  colorSelected(color: CardColors): void {
+    this.note.color = CardColorTypes[color];
   }
 
   @notesModule.Action

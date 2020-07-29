@@ -41,8 +41,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Note, Snackbar, EditNoteField } from '@/store/models';
-import { SnackbarColorTypes } from '@/store/enums';
+import { Note, Snackbar, EditNoteField, CardColors } from '@/store/models';
+import { SnackbarColorTypes, CardColorTypes } from '@/store/enums';
 import { namespace } from 'vuex-class';
 import ColorPickerMenu from './ColorPickerMenu.vue';
 
@@ -117,10 +117,10 @@ export default class NoteModal extends Vue {
     });
   }
 
-  colorSelected(color: string): void {
+  colorSelected(color: CardColors): void {
     this.setNoteField({
       name: 'color',
-      value: color,
+      value: CardColorTypes[color],
     });
   }
 }

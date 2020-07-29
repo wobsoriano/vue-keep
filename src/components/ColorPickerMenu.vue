@@ -17,7 +17,7 @@
             <v-btn
               icon
               :color="`${name !== 'Default' ? value : ''}`"
-              @click="colorSelected(value)"
+              @click="colorSelected(name)"
               v-bind="attrs"
               v-on="on"
             >
@@ -40,6 +40,7 @@
 <script lang="ts">
 import { Component, Vue, Emit, Prop } from 'vue-property-decorator';
 import { CardColorTypes } from '../store/enums';
+import { CardColors } from '../store/models';
 
 @Component
 export default class ColorPickerMenu extends Vue {
@@ -58,7 +59,7 @@ export default class ColorPickerMenu extends Vue {
   }
 
   @Emit('color-selected')
-  colorSelected(color: string): string {
+  colorSelected(color: CardColors): CardColors {
     return color;
   }
 }

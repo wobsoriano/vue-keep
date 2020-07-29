@@ -1,4 +1,4 @@
-import { SnackbarColorTypes } from './enums';
+import { SnackbarColorTypes, CardColorTypes } from './enums';
 
 export interface Note {
   id: string;
@@ -19,3 +19,5 @@ export interface EditNoteField {
   name: string;
   value: string;
 }
+
+export type CardColors = keyof typeof CardColorTypes;
