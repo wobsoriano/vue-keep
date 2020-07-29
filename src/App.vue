@@ -62,13 +62,13 @@ export default class App extends Vue {
   loading = true;
   refreshLoading = false;
 
-  async created(): Promise<void> {
+  async created() {
     this.loading = true;
     await this.getNotes();
     this.loading = false;
   }
 
-  async refresh(): Promise<void> {
+  async refresh() {
     this.refreshLoading = true;
     await this.getNotes();
     this.refreshLoading = false;

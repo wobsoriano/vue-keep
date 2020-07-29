@@ -79,7 +79,7 @@ export default class NoteModal extends Vue {
   @notesModule.Action
   removeNoteAsync!: (id: string) => Promise<string>;
 
-  async saveNote(): Promise<void> {
+  async saveNote() {
     this.loading = true;
     await this.updateNote(this.selectedNote);
     this.loading = false;
@@ -91,7 +91,7 @@ export default class NoteModal extends Vue {
     this.setShowNoteDialog(false);
   }
 
-  async deleteNote(): Promise<void> {
+  async deleteNote() {
     this.deleteLoading = true;
     await this.removeNoteAsync(this.selectedNote.id);
     this.deleteLoading = false;
@@ -103,21 +103,21 @@ export default class NoteModal extends Vue {
     this.setShowNoteDialog(false);
   }
 
-  updateTitle(value: string): void {
+  updateTitle(value: string) {
     this.setNoteField({
       name: 'title',
       value,
     });
   }
 
-  updateContent(value: string): void {
+  updateContent(value: string) {
     this.setNoteField({
       name: 'content',
       value,
     });
   }
 
-  colorSelected(color: CardColors): void {
+  colorSelected(color: CardColors) {
     this.setNoteField({
       name: 'color',
       value: CardColorTypes[color],

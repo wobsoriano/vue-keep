@@ -67,17 +67,17 @@ export default class Create extends Vue {
   titleFieldVisible = false;
   actionsVisible = false;
 
-  showTitleFieldAndActions(): void {
+  showTitleFieldAndActions() {
     this.titleFieldVisible = true;
     this.actionsVisible = true;
   }
 
-  hideTitleFieldAndActions(): void {
+  hideTitleFieldAndActions() {
     this.titleFieldVisible = false;
     this.actionsVisible = false;
   }
 
-  colorSelected(color: CardColors): void {
+  colorSelected(color: CardColors) {
     this.note.color = CardColorTypes[color];
   }
 
@@ -87,7 +87,7 @@ export default class Create extends Vue {
   @globalModule.Mutation
   showSnackbar!: (snackbar: Snackbar) => void;
 
-  async close(): Promise<void> {
+  async close() {
     this.hideTitleFieldAndActions();
 
     if (this.note.title || this.note.content) {

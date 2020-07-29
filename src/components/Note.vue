@@ -33,11 +33,11 @@ export default class NoteItem extends Vue {
 
   showEditIcon = false;
 
-  toggleEditIcon(): void {
+  toggleEditIcon() {
     this.showEditIcon = !this.showEditIcon;
   }
 
-  viewNote(): void {
+  viewNote() {
     this.setSelectedNote(this.note);
     this.setShowNoteDialog(true);
   }
