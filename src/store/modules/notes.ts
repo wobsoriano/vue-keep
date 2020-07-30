@@ -10,17 +10,17 @@ export default class NotesModule extends VuexModule {
   notes: Note[] = [];
 
   @Mutation
-  setNotes(notes: Note[]): void {
+  setNotes(notes: Note[]) {
     this.notes = notes;
   }
 
   @Mutation
-  addNote(note: Note): void {
+  addNote(note: Note) {
     this.notes.unshift(note);
   }
 
   @Mutation
-  removeNote(id: string): void {
+  removeNote(id: string) {
     const idx = this.notes.findIndex(i => i.id === id);
     if (idx !== -1) {
       this.notes.splice(idx, 1);
@@ -28,7 +28,7 @@ export default class NotesModule extends VuexModule {
   }
 
   @Mutation
-  setNote(note: Note): void {
+  setNote(note: Note) {
     const idx = this.notes.findIndex(i => i.id === note.id);
     if (idx !== -1) {
       this.notes[idx].title = note.title;
@@ -38,25 +38,25 @@ export default class NotesModule extends VuexModule {
   }
 
   @Action({ commit: 'setNotes' })
-  async getNotes(): Promise<Note[]> {
+  async getNotes() {
     const notes = await db.getNotes();
     return notes;
   }
 
   @Action({ commit: 'addNote' })
-  async createNote(note: NewNote): Promise<Note> {
+  async createNote(note: NewNote) {
     const data = await db.createNote(note);
     return data;
   }
 
   @Action({ commit: 'removeNote' })
-  async removeNoteAsync(id: string): Promise<string> {
+  async removeNoteAsync(id: string) {
     await db.deleteNote(id);
     return id;
   }
 
   @Action({ commit: 'setNote' })
-  async updateNote(note: Note): Promise<Note> {
+  async updateNote(note: Note) {
     await db.updateNote(note);
     return note;
   }
