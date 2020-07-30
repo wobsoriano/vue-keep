@@ -18,14 +18,15 @@ export default class GlobalModal extends VuexModule {
     text: '',
     color: SnackbarColorTypes.Success
   };
+  colorMenuOpen = false;
 
   @Mutation
-  setSelectedNote(note: Note): void {
+  setSelectedNote(note: Note) {
     this.selectedNote = note;
   }
 
   @Mutation
-  setNoteField(payload: EditNoteField): void {
+  setNoteField(payload: EditNoteField) {
     this.selectedNote = {
       ...this.selectedNote,
       [payload.name]: payload.value
@@ -33,12 +34,17 @@ export default class GlobalModal extends VuexModule {
   }
 
   @Mutation
-  setShowNoteDialog(payload: boolean): void {
+  setShowNoteDialog(payload: boolean) {
     this.showNoteDialog = payload;
   }
 
   @Mutation
-  showSnackbar(payload: Snackbar): void {
+  showSnackbar(payload: Snackbar) {
     this.snackbar = payload;
+  }
+
+  @Mutation
+  setColorMenuOpen(payload: boolean) {
+    this.colorMenuOpen = payload;
   }
 }

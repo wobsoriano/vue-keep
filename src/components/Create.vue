@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="12" md="8" lg="6" xl="4">
+    <v-col cols="12" md="8" lg="6" xl="4" v-click-outside="onClickOutside">
       <v-card :color="note.color">
         <div class="pa-2">
           <v-text-field
@@ -67,6 +67,9 @@ export default class Create extends Vue {
   titleFieldVisible = false;
   actionsVisible = false;
 
+  @globalModule.State
+  colorMenuOpen!: boolean;
+
   showTitleFieldAndActions() {
     this.titleFieldVisible = true;
     this.actionsVisible = true;
@@ -79,6 +82,12 @@ export default class Create extends Vue {
 
   colorSelected(color: CardColors) {
     this.note.color = CardColorTypes[color];
+  }
+
+  onClickOutside() {
+    if (!this.colorMenuOpen) {
+      this.close();
+    }
   }
 
   @notesModule.Action

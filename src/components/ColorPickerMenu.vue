@@ -1,5 +1,5 @@
 <template>
-  <v-menu open-on-hover :close-on-content-click="false" top offset-y>
+  <v-menu open-on-hover :close-on-content-click="false" top offset-y v-model="open">
     <template v-slot:activator="{ on, attrs }">
       <v-btn icon v-bind="attrs" v-on="on">
         <v-icon>mdi-palette-outline</v-icon>
@@ -38,14 +38,21 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Emit, Prop } from 'vue-property-decorator';
+import { Component, Vue, Emit, Prop, Watch } from 'vue-property-decorator';
 import { CardColorTypes } from '../store/enums';
 import { CardColors } from '../store/models';
+import { namespace } from 'vuex-class';
+
+const globalModule = namespace('global');
 
 @Component
 export default class ColorPickerMenu extends Vue {
   @Prop({ type: String, required: true })
   selected!: string;
+  open = false;
+
+  @globalModule.Mutation
+  setColorMenuOpen!: (payload: boolean) => void;
 
   get colors() {
     return CardColorTypes;
@@ -63,5 +70,11 @@ export default class ColorPickerMenu extends Vue {
   colorSelected(color: CardColors): CardColors {
     return color;
   }
+
+  @Watch('open')
+  menuChanged(val: boolean) {
+    this.setColorMenuOpen(val);
+  }
+  
 }
 </script>
