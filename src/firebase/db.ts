@@ -1,10 +1,9 @@
 import { db } from './firebase';
-import { Note, NewNote } from '@/store/models';
-
-const noteCollection = db.collection('notes');
+import { collection, doc, updateDoc, getDocs, addDoc, deleteDoc } from 'firebase/firestore/lite';
+import { Note, NewNote } from '@/store/types';
 
 export const createNote = async (note: NewNote): Promise<Note> => {
-  const newDoc = await noteCollection.add(note);
+  const newDoc = await addDoc(collection(db, 'notes'), note);
   return {
     id: newDoc.id,
     ...note
@@ -12,7 +11,7 @@ export const createNote = async (note: NewNote): Promise<Note> => {
 };
 
 export const getNotes = async (): Promise<Note[]> => {
-  const querySnapshot = await noteCollection.get();
+  const querySnapshot = await getDocs(collection(db, 'notes'));
   return querySnapshot.docs.map(doc => {
     const { title, content, color } = doc.data();
     return {
@@ -25,7 +24,8 @@ export const getNotes = async (): Promise<Note[]> => {
 };
 
 export const updateNote = async (note: Note): Promise<Note> => {
-  await noteCollection.doc(note.id).update({
+  const noteRef = doc(db, 'notes', note.id);
+  await updateDoc(noteRef, {
     title: note.title,
     content: note.content,
     color: note.color
@@ -34,6 +34,7 @@ export const updateNote = async (note: Note): Promise<Note> => {
 };
 
 export const deleteNote = async (id: string): Promise<string> => {
-  await noteCollection.doc(id).delete();
+  const noteRef = doc(db, 'notes', id);
+  await deleteDoc(noteRef);
   return id;
 };

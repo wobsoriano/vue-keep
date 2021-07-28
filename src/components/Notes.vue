@@ -18,7 +18,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import NoteItem from './Note.vue';
-import { Note } from '@/store/models';
+import { Note } from '@/store/types';
 import { namespace } from 'vuex-class';
 
 const notesModule = namespace('notes');

@@ -46,7 +46,7 @@ import Create from './components/Create.vue';
 import Notes from './components/Notes.vue';
 import NoteModal from './components/NoteModal.vue';
 import { namespace } from 'vuex-class';
-import { Snackbar, Note } from './store/models';
+import { Snackbar, Note } from './store/types';
 
 const notesModule = namespace('notes');
 const globalModule = namespace('global');

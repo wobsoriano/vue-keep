@@ -1,7 +1,7 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
-import { Note, NewNote } from '../models';
+import { Note, NewNote } from '../types';
 import { db } from '@/firebase';
-import { CardColorTypes } from '@/store/enums';
+import { CardColorTypes } from '@/store/types';
 
 @Module({
   namespaced: true

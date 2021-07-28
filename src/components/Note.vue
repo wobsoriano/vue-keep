@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Note } from '@/store/models';
+import { Note } from '@/store/types';
 import { namespace } from 'vuex-class';
 
 const globalModule = namespace('global');

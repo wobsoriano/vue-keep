@@ -39,8 +39,8 @@
 
 <script lang="ts">
 import { Component, Vue, Emit, Prop, Watch } from 'vue-property-decorator';
-import { CardColorTypes } from '../store/enums';
-import { CardColors } from '../store/models';
+import { CardColorTypes } from '../store/types';
+import { CardColors } from '../store/types';
 import { namespace } from 'vuex-class';
 
 const globalModule = namespace('global');

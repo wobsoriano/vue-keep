@@ -40,9 +40,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { NewNote, Note, Snackbar, CardColors } from '@/store/models';
+import { NewNote, Note, Snackbar, CardColors } from '@/store/types';
 import { namespace } from 'vuex-class';
-import { SnackbarColorTypes, CardColorTypes } from '../store/enums';
+import { SnackbarColorTypes, CardColorTypes } from '../store/types';
 import ColorPickerMenu from './ColorPickerMenu.vue';
 
 const globalModule = namespace('global');

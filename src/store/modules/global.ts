@@ -1,6 +1,6 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
-import { Note, Snackbar, EditNoteField } from '@/store/models';
-import { SnackbarColorTypes, CardColorTypes } from '@/store/enums';
+import { Note, Snackbar, EditNoteField } from '@/store/types';
+import { SnackbarColorTypes, CardColorTypes } from '@/store/types';
 
 @Module({
   namespaced: true

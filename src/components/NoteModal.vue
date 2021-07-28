@@ -41,8 +41,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Note, Snackbar, EditNoteField, CardColors } from '@/store/models';
-import { SnackbarColorTypes, CardColorTypes } from '@/store/enums';
+import { Note, Snackbar, EditNoteField, CardColors } from '@/store/types';
+import { SnackbarColorTypes, CardColorTypes } from '@/store/types';
 import { namespace } from 'vuex-class';
 import ColorPickerMenu from './ColorPickerMenu.vue';
 
