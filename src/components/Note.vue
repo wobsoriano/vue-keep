@@ -15,7 +15,9 @@
         <v-icon v-show="showEditIcon">mdi-pencil-outline</v-icon>
       </v-btn>
     </v-card-title>
-    <v-card-text v-text="note.content"></v-card-text>
+    <v-card-text>
+      {{ note.content }}
+    </v-card-text>
   </v-card>
 </template>
 
